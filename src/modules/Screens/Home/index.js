@@ -4,7 +4,8 @@ import {
     View,
     StyleSheet,
     TouchableOpacity,
-    Picker
+    Picker,
+    Image
 } from 'react-native';
 import Slider from 'react-native-slider';
 import moment from 'moment-timezone';
@@ -15,9 +16,12 @@ const HomeComponents = ({
     navigation,
     selectedTimeZone,
     currentTimeZone,
-    offset, 
+    offset,
     setOffset,
-    // handleSliderChange
+    setCurrentTimeZone,
+    realTime,
+    setRealTime,
+    handleSliderChange
 }) => {
     const timezones = [
         { name: 'New York', offset: '-05:00' },
@@ -28,25 +32,32 @@ const HomeComponents = ({
         { name: 'Sydney', offset: '+10:00' },
         { name: 'Pakistan', offset: '+5:00' }
     ];
-    const handleSliderChange = (value) => {
-        const offsetHours = Math.floor(value);
-        const offsetMinutes = (value - offsetHours) * 60;
-        const offsetString = moment.utc().hours(offsetHours).minutes(offsetMinutes).format('HH:mm');
-        offset(`+${offsetString}`)
-    };
+    // const handleSliderChange = (value) => {
+    //     const offsetHours = Math.floor(value);
+    //     const offsetMinutes = (value - offsetHours) * 60;
+    //     const offsetString = moment.utc().hours(offsetHours).minutes(offsetMinutes).format('HH:mm');
+    //     setOffset(`+${offsetString}`)
+    // };
+    // const handleSliderChange = (val) =>{
+    // setOffset(val);
+    // realTime(setRealTime(val));
+    // };
     return (
         <View style={styles.Container}>
+            {/* <Image source={require("../../../assets/bg image/bgImg.png")} style={styles.bgImg} /> */}
             <Text style={styles.MainText}>World Time Zone</Text>
             <Text>selectedTimeZone: {selectedTimeZone}</Text>
-            <Text>currentTime: {currentTimeZone}</Text>
-            <View style={{ alignItems: 'center' }}>
+            <Text style={styles.time}>currentTime: {realTime}</Text>
+            <View style={styles.slider}>
                 <Slider
                     style={{ width: '85%', marginBottom: 20 }}
                     minimumValue={-12}
                     maximumValue={12}
                     step={0.5}
-                    value={-5}
+                    value={-13}
                     onValueChange={handleSliderChange}
+                    // minimumTracktintcolor="Black"
+                    // maximumTracktintcolor="Blue"
                 />
             </View>
             {/* <View>
@@ -67,7 +78,7 @@ const HomeComponents = ({
                 </Text>
             ))}
 
-            {/* <TouchableOpacity
+            <TouchableOpacity
                 onPress={() => navigation.navigate('Test')}
                 style={{
                     width: 190,
@@ -85,7 +96,7 @@ const HomeComponents = ({
                     fontSize={24}
                     color='#fff'
                 />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
         </View>
     )
@@ -94,6 +105,7 @@ const HomeComponents = ({
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
+
     },
     MainText: {
         fontSize: 21,
@@ -102,7 +114,23 @@ const styles = StyleSheet.create({
     },
     TimeText: {
         fontSize: 20,
-        color: '#2F25BE'
+        color: '#000',
+        textAlign: 'center',
+        borderWidth: 0.5,
+        borderColor: '#a4d9f5',
+        margin: 5
+    },
+    slider: {
+        alignItems: 'center',
+    },
+    bgImg: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute'
+    },
+    time: {
+        fontSize: 21,
+        color: colors.black
     }
 });
 
