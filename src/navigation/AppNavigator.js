@@ -5,6 +5,7 @@ import { MainNavigator } from "./MainNavigator";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from "../../AuthProvider";
 import {ActivityIndicator} from 'react-native';
+import MainContainer from "../modules/Screens/BottomTab/MainContainer";
 
 const AppNavigator = () =>{
     const {user, login} = useContext(AuthContext);
@@ -33,7 +34,8 @@ const AppNavigator = () =>{
 
     return(
         <NavigationContainer>
-            {user ? <MainNavigator /> : <Auth />}
+            <MainContainer />
+            {/* {user ? <MainNavigator /> : <Auth />} */}
         </NavigationContainer>
     );
 };

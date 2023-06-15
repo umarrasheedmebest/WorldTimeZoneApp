@@ -11,6 +11,7 @@ import Slider from 'react-native-slider';
 import moment from 'moment-timezone';
 import { colors } from "../../globalStyle";
 import CustomText from "../../Common/CustomText";
+import MainContainer from "../BottomTab/MainContainer";
 
 const HomeComponents = ({
     navigation,
@@ -21,32 +22,14 @@ const HomeComponents = ({
     setCurrentTimeZone,
     realTime,
     setRealTime,
-    handleSliderChange
+    handleSliderChange,
+    timezones,
+
 }) => {
-    const timezones = [
-        { name: 'New York', offset: '-05:00' },
-        { name: 'Los Angeles', offset: '-08:00' },
-        { name: 'London', offset: '+01:00' },
-        { name: 'Paris', offset: '+02:00' },
-        { name: 'Tokyo', offset: '+09:00' },
-        { name: 'Sydney', offset: '+10:00' },
-        { name: 'Pakistan', offset: '+5:00' }
-    ];
-    // const handleSliderChange = (value) => {
-    //     const offsetHours = Math.floor(value);
-    //     const offsetMinutes = (value - offsetHours) * 60;
-    //     const offsetString = moment.utc().hours(offsetHours).minutes(offsetMinutes).format('HH:mm');
-    //     setOffset(`+${offsetString}`)
-    // };
-    // const handleSliderChange = (val) =>{
-    // setOffset(val);
-    // realTime(setRealTime(val));
-    // };
+
     return (
         <View style={styles.Container}>
-            {/* <Image source={require("../../../assets/bg image/bgImg.png")} style={styles.bgImg} /> */}
             <Text style={styles.MainText}>World Time Zone</Text>
-            <Text>selectedTimeZone: {selectedTimeZone}</Text>
             <Text style={styles.time}>currentTime: {realTime}</Text>
             <View style={styles.slider}>
                 <Slider
@@ -56,21 +39,8 @@ const HomeComponents = ({
                     step={0.5}
                     value={-13}
                     onValueChange={handleSliderChange}
-                    // minimumTracktintcolor="Black"
-                    // maximumTracktintcolor="Blue"
                 />
             </View>
-            {/* <View>
-                <Picker
-                    selectedValue={selectedCountry}
-                    style={{ height: 50, width: '80%', marginBottom: 20 }}
-                    onValueChange={handleCountryChange}
-                >
-                    {timezones.map((tz) => (
-                        <Picker.Item key={tz.name} label={tz.name} value={tz.name} />
-                    ))}
-                </Picker>
-            </View> */}
 
             {timezones.map(({ name, offset }) => (
                 <Text key={name} style={styles.TimeText}>
@@ -97,6 +67,7 @@ const HomeComponents = ({
                     color='#fff'
                 />
             </TouchableOpacity>
+            {/* <MainContainer /> */}
 
         </View>
     )
@@ -105,32 +76,33 @@ const HomeComponents = ({
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
+        backgroundColor: '#b5ebd2'
 
     },
     MainText: {
         fontSize: 21,
         textAlign: 'center',
         color: colors.black,
+        margin: 20
+
     },
     TimeText: {
         fontSize: 20,
         color: '#000',
         textAlign: 'center',
-        borderWidth: 0.5,
-        borderColor: '#a4d9f5',
+        borderWidth: 0.8,
         margin: 5
     },
     slider: {
         alignItems: 'center',
     },
-    bgImg: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute'
-    },
+
     time: {
         fontSize: 21,
-        color: colors.black
+        color: colors.black,
+        textAlign: 'center',
+        borderWidth: 0.5,
+        borderRadius: 5,
     }
 });
 
